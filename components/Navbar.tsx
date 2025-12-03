@@ -1,41 +1,79 @@
 import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
-const navLinks = [
+const anchorLinks = [
   { href: '#destinations', label: 'Destinations' },
-  { href: '#features', label: 'Experiences' },
   { href: '#how-it-works', label: 'Process' },
   { href: '#testimonials', label: 'Stories' },
 ];
 
+const mainLinks = [
+  { href: '/collections', label: 'Collections' },
+  { href: '/about', label: 'About' },
+];
+
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
+
+  const handleAnchorClick = (href: string, e: React.MouseEvent) => {
+    if (location.pathname !== '/') {
+      e.preventDefault();
+      navigate('/');
+      // 等待導航完成後再滾動到錨點
+      setTimeout(() => {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+    setIsOpen(false);
+  };
 
   return (
     <nav className="fixed w-full z-50 bg-sand-50/90 backdrop-blur-md border-b border-sand-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-24">
           {/* Logo */}
-          <div className="flex-shrink-0 flex items-center cursor-pointer">
+          <Link to="/" className="flex-shrink-0 flex items-center cursor-pointer">
             <span className="font-serif font-bold text-3xl text-emerald-900 tracking-tight">JourneyNest.</span>
-          </div>
+          </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-10">
-            {navLinks.map((link) => (
+          <div className="hidden md:flex items-center space-x-8">
+            {/* Anchor Links (for homepage sections) */}
+            {anchorLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
+                onClick={(e) => handleAnchorClick(link.href, e)}
                 className="text-sand-800 hover:text-emerald-900 transition-colors font-medium text-sm tracking-wide uppercase"
               >
                 {link.label}
               </a>
             ))}
-            <button className="bg-emerald-800 hover:bg-emerald-900 text-white px-7 py-3 rounded-lg font-medium text-sm tracking-wide transition-all shadow-sm hover:shadow-md">
-              Start Planning
-            </button>
+            
+            {/* Main Links */}
+            {mainLinks.map((link) => (
+              <Link
+                key={link.label}
+                to={link.href}
+                className="text-sand-800 hover:text-emerald-900 transition-colors font-medium text-sm tracking-wide uppercase"
+              >
+                {link.label}
+              </Link>
+            ))}
+            
+            <Link to="/contact">
+              <button className="bg-emerald-800 hover:bg-emerald-900 text-white px-7 py-3 rounded-lg font-medium text-sm tracking-wide transition-all shadow-sm hover:shadow-md">
+                Start Planning
+              </button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -57,23 +95,39 @@ const Navbar: React.FC = () => {
       {isOpen && (
         <div
           id="mobile-nav"
-          className="md:hidden bg-sand-50 border-b border-sand-200 absolute w-full h-screen"
+          className="md:hidden bg-sand-50 border-b border-sand-200 absolute w-full h-screen overflow-y-auto"
         >
           <div className="px-6 pt-8 pb-10 space-y-6 flex flex-col items-center justify-center h-3/4">
-            {navLinks.map((link) => (
+            {/* Anchor Links */}
+            {anchorLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                onClick={toggleMenu}
+                onClick={(e) => handleAnchorClick(link.href, e)}
                 className="block text-2xl font-serif text-emerald-900"
               >
                 {link.label}
               </a>
             ))}
+            
+            {/* Main Links */}
+            {mainLinks.map((link) => (
+              <Link
+                key={link.label}
+                to={link.href}
+                onClick={toggleMenu}
+                className="block text-2xl font-serif text-emerald-900"
+              >
+                {link.label}
+              </Link>
+            ))}
+            
             <div className="pt-8">
-              <button className="w-full bg-emerald-800 hover:bg-emerald-900 text-white px-8 py-4 rounded-lg font-medium text-lg transition-colors shadow-md">
-                Start Planning
-              </button>
+              <Link to="/contact" onClick={toggleMenu}>
+                <button className="w-full bg-emerald-800 hover:bg-emerald-900 text-white px-8 py-4 rounded-lg font-medium text-lg transition-colors shadow-md">
+                  Start Planning
+                </button>
+              </Link>
             </div>
           </div>
         </div>

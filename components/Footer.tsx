@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Instagram, Twitter, Facebook } from 'lucide-react';
 
 const Footer: React.FC = () => {
@@ -8,7 +9,9 @@ const Footer: React.FC = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20 border-b border-emerald-900 pb-12">
            <div className="md:col-span-4">
-              <span className="font-serif text-3xl font-bold tracking-tight text-white mb-6 block">JourneyNest.</span>
+              <Link to="/">
+                <span className="font-serif text-3xl font-bold tracking-tight text-white mb-6 block">JourneyNest.</span>
+              </Link>
               <p className="text-emerald-200/80 leading-relaxed font-light max-w-sm">
                  Crafting journeys that inspire, connect, and transform. The world is waiting for your story.
               </p>
@@ -17,8 +20,8 @@ const Footer: React.FC = () => {
            <div className="md:col-span-2">
               <h4 className="text-white font-medium mb-6 uppercase tracking-widest text-xs">Explore</h4>
               <ul className="space-y-4 text-emerald-200/80 font-light text-sm">
-                 <li><a href="#" className="hover:text-white transition-colors">Destinations</a></li>
-                 <li><a href="#" className="hover:text-white transition-colors">Experiences</a></li>
+                 <li><a href="/#destinations" className="hover:text-white transition-colors">Destinations</a></li>
+                 <li><a href="/#features" className="hover:text-white transition-colors">Experiences</a></li>
                  <li><a href="#" className="hover:text-white transition-colors">Journal</a></li>
                  <li><a href="#" className="hover:text-white transition-colors">Membership</a></li>
               </ul>
@@ -27,10 +30,10 @@ const Footer: React.FC = () => {
            <div className="md:col-span-2">
               <h4 className="text-white font-medium mb-6 uppercase tracking-widest text-xs">Company</h4>
               <ul className="space-y-4 text-emerald-200/80 font-light text-sm">
-                 <li><a href="#" className="hover:text-white transition-colors">About</a></li>
+                 <li><Link to="/about" className="hover:text-white transition-colors">About</Link></li>
                  <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
                  <li><a href="#" className="hover:text-white transition-colors">Press</a></li>
-                 <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+                 <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
               </ul>
            </div>
 
@@ -49,9 +52,9 @@ const Footer: React.FC = () => {
             &copy; {new Date().getFullYear()} JourneyNest Inc. All rights reserved.
           </div>
           <div className="flex space-x-6">
-            <a href="#" className="hover:text-white transition-colors"><Instagram className="h-4 w-4" /></a>
-            <a href="#" className="hover:text-white transition-colors"><Twitter className="h-4 w-4" /></a>
-            <a href="#" className="hover:text-white transition-colors"><Facebook className="h-4 w-4" /></a>
+            <a href="#" className="hover:text-white transition-colors p-2"><Instagram className="h-6 w-6" /></a>
+            <a href="#" className="hover:text-white transition-colors p-2"><Twitter className="h-6 w-6" /></a>
+            <a href="#" className="hover:text-white transition-colors p-2"><Facebook className="h-6 w-6" /></a>
           </div>
         </div>
       </div>
