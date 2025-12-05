@@ -35,12 +35,20 @@ const Navbar: React.FC = () => {
     setIsOpen(false);
   };
 
+  const handleLogoClick = (e: React.MouseEvent) => {
+    if (location.pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    setIsOpen(false);
+  };
+
   return (
     <nav className="fixed w-full z-50 bg-sand-50/90 backdrop-blur-md border-b border-sand-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-24">
           {/* Logo */}
-          <Link to="/" className="flex-shrink-0 flex items-center cursor-pointer">
+          <Link to="/" className="flex-shrink-0 flex items-center cursor-pointer" onClick={handleLogoClick}>
             <span className="font-serif font-bold text-3xl text-emerald-900 tracking-tight">JourneyNest.</span>
           </Link>
 

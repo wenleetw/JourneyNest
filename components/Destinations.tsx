@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Calendar } from 'lucide-react';
 import { Destination } from '../types';
+import { collections } from '../data/collections';
 
 // Mapping destinations to collection IDs
 // Each destination has its own dedicated collection
@@ -56,12 +58,37 @@ const Destinations: React.FC = () => {
                 />
               </div>
               
-              <div className="flex justify-between items-baseline border-b border-sand-200 pb-4">
+              <div className="space-y-4">
                 <div>
                   <h3 className="font-serif text-2xl text-emerald-950 mb-1 group-hover:text-terracotta-600 transition-colors">{dest.name}</h3>
-                  <p className="text-sand-800 font-light text-sm">{dest.description}</p>
+                  {(() => {
+                    const collection = collections.find(c => c.id === dest.collectionId);
+                    return (
+                      <p className="text-sand-800 font-light text-sm mb-4">
+                        {collection ? collection.description : dest.description}
+                      </p>
+                    );
+                  })()}
                 </div>
-                <span className="text-emerald-800 font-medium text-sm whitespace-nowrap ml-4">{dest.price}</span>
+                
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-2 text-sm text-sand-700">
+                    {(() => {
+                      const collection = collections.find(c => c.id === dest.collectionId);
+                      return (
+                        <>
+                          {collection && (
+                            <>
+                              <Calendar className="h-4 w-4 text-emerald-900" />
+                              <span>{collection.duration}</span>
+                            </>
+                          )}
+                        </>
+                      );
+                    })()}
+                  </div>
+                  <span className="text-emerald-800 font-medium text-sm">{dest.price}</span>
+                </div>
               </div>
             </Link>
           ))}

@@ -9,26 +9,8 @@ const Collections: React.FC = () => {
 
   return (
     <main>
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-sand-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <span className="block text-terracotta-600 font-bold tracking-widest text-xs uppercase mb-6">
-              Travel Collections
-            </span>
-            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl text-emerald-950 leading-[1.1] mb-8">
-              Curated journeys for <br/>
-              <span className="italic text-terracotta-500">every explorer</span>.
-            </h1>
-            <p className="text-lg text-sand-800 mb-10 leading-relaxed font-light max-w-2xl mx-auto">
-              Discover our handcrafted travel collections, each designed around a theme or experience. From cultural immersion to coastal escapes, find your perfect journey.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Featured Collections */}
-      <section className="py-24 bg-white">
+      <section className="pt-32 pb-24 lg:pt-40 lg:pb-24 bg-sand-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <span className="block text-terracotta-600 font-bold tracking-widest text-xs uppercase mb-6">
@@ -42,7 +24,7 @@ const Collections: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {featuredCollections.map((collection) => (
               <Link key={collection.id} to={`/collections/${collection.id}`} className="group cursor-pointer">
-                <div className="relative overflow-hidden rounded-xl aspect-[4/5] mb-6">
+                <div className="relative overflow-hidden rounded-xl aspect-[4/4] mb-6">
                   <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors z-10"></div>
                   <img 
                     src={collection.image} 
@@ -92,7 +74,7 @@ const Collections: React.FC = () => {
       </section>
 
       {/* All Collections */}
-      <section className="py-24 bg-sand-100">
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <span className="block text-terracotta-600 font-bold tracking-widest text-xs uppercase mb-6">
@@ -159,7 +141,7 @@ const Collections: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-sand-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="font-serif text-4xl md:text-5xl text-emerald-950 mb-6">
             Don't see what you're looking for?
